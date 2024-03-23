@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>IT Sec</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style>
+		.smallerFont + table {
+			font-size: 1.2rem;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown><textarea data-template>
+					# Security in the digital space
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					# Content
+
+					- IT-Sec, non-experts vs experts
+					- General advice
+					- Demystifying encryption
+					- What's the deal with metadata?
+					- ISP - VPN - Tor
+					- Messengers
+					- Cloud drives
+					- Let's send an encrypted email...
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					What do non-experts think?
+
+					- Use anti-virus
+					- Use strong password
+					- Change passwords frequently
+					- Only visit known websites
+					- Don't share personal data
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					What do experts think?
+					- Install software updates
+					- Use unique passwords
+					- Use 2FA
+					- Use strong passwords
+					- Use a password manager
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					### Update your devices!
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					## There is no silver bullet
+Tools can help you, they all have pros and cons. There is not one solution fits all. You need to keep thinking about your situation.
+
+What you really want is OpSec. The digital world is just a part of security.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					## Risk assesment
+					A few questions to ask yourself:
+					- What do I need to protect?
+					- Who do I need to protect it from?
+					- What happens if they do get it?
+					- How much do they want that information, and how easy is it for them to get it?
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					You **can't** hide everything from everybody, that is paranoia.
+					<aside class="notes">
+					Examples of different things to hide from different people.
+					</aside>
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					Broader questions:
+					- Do I want to keep off the radar?
+					- Can I confront authorities with "It's my right to do that" or "Do you have evidence?"?
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					## Demystifying encryption?
+					Rotation cypher
+
+					"I use ROT13 twice!"
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					Public-Private key (asymetric encryption)
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					A public key looks like this:
+					```
+					ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBN1N2AiSxq6+DgR3sgUT8NORMLGsWm74tMEb7ZjVJbi ramzi@laptop
+					```
+
+					A private key looks like this:
+					```
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACATdTdgIksauvg4Ed7IFE/DTkTCxrFpu+LTBG+2Y1SW4gAAAJC/E28+vxNv
+PgAAAAtzc2gtZWQyNTUxOQAAACATdTdgIksauvg4Ed7IFE/DTkTCxrFpu+LTBG+2Y1SW4g
+AAAED9p9fdeA0GoP9HalR4np3Zk1Zxy94SfeMDjuvVZn1lFxN1N2AiSxq6+DgR3sgUT8NO
+RMLGsWm74tMEb7ZjVJbiAAAADHJhbXppQGxhcHRvcAE=
+-----END OPENSSH PRIVATE KEY-----
+```
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					### What is the deal with Metadata?
+					Does encryption save the day?
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					Let's look at the following chat:
+
+					![](chat.png)
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					Assuming the chat has proper encryption, what will the different actors learn?
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					The ISP will see the communication from you to the chat server. They will not know who you texted, or what the content of the text is.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+**ISP logs**
+| Timestamp | Sender | Reciever | Message |
+|-----------|--------|----------|---------|
+| 2024-03-14 23:58 | \<MyIP\> | \<chatIP\> | OqfqWML8zGw+6l1y6E |
+| 2024-03-14 23:58 | \<chatIP\> | \<MyIP\> | NE0GsA0YAlnkC1PX1G |
+| 2024-03-14 23:58 | \<MyIP\> | \<chatIP\> | HirzeJfL+rUzYFci45 |
+| 2024-03-14 23:59 | \<chatIP\> | \<MyIP\> | uVuJKMRpprJc9PfSB7 |
+
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					So they know, that I send 2 messages and got 2 replies. They can only assume that it is from the same person.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					**Chat logs**
+| Timestamp | Sender | Reciever | Message |
+|-----------|--------|----------|---------|
+| 2024-03-14 23:58 | \<MyUser\> | \<otherUser\> | 5rHs/ukyVaFqYyf1x0 |
+| 2024-03-14 23:58 | \<otherUser\> | \<myUser\> | yXrOiE9L/1EphiKr0Y |
+| 2024-03-14 23:58 | \<MyUser\> | \<otherUser\> | JctqI+NGIsi7w1qD84 |
+| 2024-03-14 23:59 | \<otherUser\> | \<myUser\> | wn75eOlgoqA0su23aH |
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					They also know both IPs, and the obvious information, that you are online. The chat company could also notice 30 mins later, that both users are connected via the same wifi.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					# ISP - VPN - Tor
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					### ISP - Internet Service Provider
+					An ISP is a company like Telekom, O2 and Vodafone.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					- What does your ISP know about you?
+
+					Your ISP is the one giving you an IP-Adress and in most countries they are obligated to keep logs of who has which IP-Adress at which time, and they are required to hand them over to the authorities - normally only after being presented a warrent.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					Your ISP is also handeling ALL of your communication. Every website you visit, every text you send, every video you watch.
+
+					That said, they handle the forwarding of information, but if it is encrypted, they can only know that you sent something, and to who you send it.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					You may have more than one ISP. Eg you have a wifi from Vodafone and a cellphone SIM from O2. Nonetheless, both are on your name.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					Legal trick in Germany
+
+					In case of a shared flat, certain copy-right violations (downloading a movie) can be refuted by saying "I don't know who downloaded it. That day we also had guests who could have done it.".
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					Public wifi is typically anonymous.
+
+					They're sometimes restricted, and they may log device information.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					### VPN - Virtual Private Network
+
+					TLDR; It's just replacing your ISP.
+
+					![](What-is-a-VPN.png)
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					An attacker who "tapped your wire", can not konw what you are communicating and to who.
+
+					They can learn, that:
+
+					- you are using a VPN
+					- when you are using it
+					- how much data is going back and forth.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					The following use roughly the same amount of encrypted data and cannot be distinguished:
+
+					- if you are watching a stream on twich or downloading a movie
+					- which website you are visting.
+					- if you are texting one person a lot, or many people a little.
+
+					Note that even learning the above is an effort.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					On the other hand, all data is decrypted at the VPN server, which is your proxy. That means, your VPN provider knows everything your ISP would normally know. So basically you just shifted your trust from the ISP to the VPN.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					One thing to consider is, that your VPN provider can be in a different country, and not obligated to cooperate with authorities in your country. But they can.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					### Tor - The Onion Router
+
+					![](Tor-Network.png)
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					The idea is that every message (or image or whatever) is encrypted at least 3 times, and routed throgh at least 3 nodes before reaching the other end.
+					By that, no one node can know who is communicating with who.
+
+					It's kind of like chaining 3 VPNs one after the other, except they don't require a login for the connection and keep getting mixed around.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					It's meant to give complete anonymity, as no one node knows the origin and destination of a message.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					Originally developed by USA to communicate with their spys/informants.
+
+					Later is was funded by different Gov and humand rights institutions.
+
+					Today it's about half funded by the USA gov, and the other half is a mix of individuals, foundations and cooperations.
+
+					The NSA repeatedly claims to control a big chunk of the Tor exit nodes, and that this gives them an idea of what is happening in the dark net.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					## Messengers
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					<div class="smallerFont"></div>
+
+| Messenger | open source client | open source server | Database | Notes |
+|-----------|--------------------|--------------------|------|-------|
+| Whatsapp / Telegram | x | x | ✓ | Whatsapp cooperates with USA authorities |
+| Signal | ✓ | x | x | Has a centrelised server |
+| Matrix | ✓ | ✓ | ✓ | Slow and bloated, gaining traction. |
+| SimpleX | ✓ | ✓ | x | Has no unique identifier |
+| IRC | ✓ | ✓ | x | It's one of the absolute oldest system on the internet. |
+| Briar | ✓ | ✓ | x | Made for revolution/crisis scenarios. Mesh network, anonymus. Possibly slow. |
+
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					## Cloud drives - Proton vs Google vs Self hosted
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					- Google is reading your data, and not even trying to hide it.
+- Proton is promissing to encrypt your data, and has a solid case to prove it - the client is open source.
+- Self hosted is technically the best. But... you need money, you need time to set it up, you can make mistakes with the configuration. Your hoster still gets some information.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					So, you can pick and choose, depending on your risk assesment.
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					## Additional resources:
+					- https://activisthandbook.org/tools/security
+					- https://media.ccc.de/v/35c3-10018-verhalten_bei_hausdurchsuchungen - Talk aobut behaviour during a police raid in your house (German)
+				</textarea></section>
+				<section data-markdown><textarea data-template>
+					Thank you!
+```
+					❤️🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤
+					❤️❤️🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤
+					❤️❤️❤️🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤
+					❤️❤️❤️❤️🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍
+					❤️❤️❤️❤️❤️🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍
+					❤️❤️❤️❤️🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍
+					❤️❤️❤️💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚
+					❤️❤️💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚
+					❤️💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚
+```
+				</textarea></section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				mouseWheel: true,
+				controlsTutorial: false,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
